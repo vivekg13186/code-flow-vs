@@ -1,0 +1,68 @@
+{
+  "name": "code-flow-vscode",
+  "displayName": "Code Flow",
+  "description": "Run and manage Code Flow Python workflows from Visual Studio Code.",
+  "version": "0.1.0",
+  "publisher": "code-flow",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onCommand:codeFlow.open",
+    "onCommand:codeFlow.createWorkflow",
+    "onCommand:codeFlow.configureServer"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeFlow.open",
+        "title": "Code Flow: Open Dashboard"
+      },
+      {
+        "command": "codeFlow.createWorkflow",
+        "title": "Code Flow: Create Python Workflow"
+      },
+      {
+        "command": "codeFlow.configureServer",
+        "title": "Code Flow: Configure Server URL"
+      }
+    ],
+    "configuration": {
+      "title": "Code Flow",
+      "properties": {
+        "codeFlow.serverUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "Base URL of the Code Flow server."
+        },
+        "codeFlow.workflowsDirectory": {
+          "type": "string",
+          "default": "workflows",
+          "description": "Workflow folder relative to the workspace root."
+        }
+      }
+    },
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snippets/codeflow.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.0",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.9.3"
+  }
+}

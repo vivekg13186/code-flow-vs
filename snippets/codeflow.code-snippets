@@ -1,0 +1,55 @@
+{
+  "Code Flow workflow": {
+    "prefix": "cf-workflow",
+    "body": [
+      "from engine import Workflow, flow, step",
+      "",
+      "class ${1:Example}Flow(Workflow):",
+      "    description = \"${2:Workflow description}\"",
+      "    inputs = {${3}}",
+      "",
+      "    @flow",
+      "    def main(self, ctx):",
+      "        ${4:result = self.run_step(ctx)}",
+      "        return {\"result\": result}",
+      "",
+      "    @step()",
+      "    def run_step(self, ctx):",
+      "        ${5:pass}",
+      ""
+    ],
+    "description": "Create a Code Flow workflow with a flow entry point and journaled step"
+  },
+  "Code Flow step": {
+    "prefix": "cf-step",
+    "body": [
+      "@step(retry=${1:0}, timeout=${2:30})",
+      "def ${3:step_name}(self, ${4:ctx}):",
+      "    ${5:pass}"
+    ],
+    "description": "Add a journaled Code Flow step"
+  },
+  "Code Flow typed inputs": {
+    "prefix": "cf-inputs",
+    "body": [
+      "from dataclasses import dataclass",
+      "",
+      "@dataclass",
+      "class ${1:Workflow}Inputs:",
+      "    ${2:name}: str",
+      "    ${3:count}: int = ${4:1}",
+      "",
+      "class ${5:Example}Flow(Workflow):",
+      "    inputs = ${1:Workflow}Inputs",
+      ""
+    ],
+    "description": "Declare typed workflow inputs using a dataclass"
+  },
+  "Code Flow dashboard widget": {
+    "prefix": "cf-widget",
+    "body": [
+      "self.widget(\"${1:metric}\", \"${2:Title}\", ${3:value})"
+    ],
+    "description": "Add a Code Flow dashboard widget"
+  }
+}
